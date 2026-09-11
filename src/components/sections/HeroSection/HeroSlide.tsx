@@ -24,11 +24,9 @@ function HeroSlide({ slide, active, priority = false }: HeroSlideProps) {
         animate={active ? "visible" : "hidden"}
         variants={imageReveal}
       >
-        {/* next/image has no native art-direction support, so the mobile crop
-            is swapped in via a CSS breakpoint rather than a single <img sizes>. */}
         <div className="absolute inset-0 sm:hidden">
           <ImageWithFallback
-            src={slide.mobileImage ?? slide.image}
+            src={slide.image}
             alt={slide.title}
             fallbackLabel={slide.title}
             sizes="100vw"
@@ -60,10 +58,16 @@ function HeroSlide({ slide, active, priority = false }: HeroSlideProps) {
           >
             {slide.title}
           </motion.h1>
-          <motion.p variants={fadeUp} className="max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
+          <motion.p
+            variants={fadeUp}
+            className="max-w-lg text-base leading-relaxed text-white/85 sm:text-lg"
+          >
             {slide.description}
           </motion.p>
-          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 pt-2">
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap items-center gap-3 pt-2"
+          >
             <Button size="xl" render={<Link href={slide.href} />}>
               {slide.ctaLabel}
               <ArrowRight data-icon="inline-end" />
